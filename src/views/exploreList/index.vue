@@ -3,8 +3,8 @@
         <el-card class="box-card">
             <div class="top-box">
                 <el-form ref="queryFormRef" :model="queryParams" :inline="true">
-                    <el-form-item label="学生类型" prop="">
-                        <el-select v-model="queryParams.nType" size="small" placeholder="请选择学生类型">
+                    <el-form-item label="类型" prop="">
+                        <el-select v-model="queryParams.nType" size="small" placeholder="请选择类型">
                             <el-option
                             v-for="item in options"
                             :key="item.value"
@@ -13,11 +13,11 @@
                             </el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item label="学生姓名" prop="">
-                        <el-input v-model="queryParams.vcName" size="small" placeholder="请输入学生姓名" clearable/>
+                    <el-form-item label="姓名" prop="">
+                        <el-input v-model="queryParams.vcName" size="small" placeholder="请输入姓名" clearable/>
                     </el-form-item>
-                    <el-form-item label="学校名称" prop="">
-                        <el-input v-model="queryParams.vcSchool" size="small" placeholder="请输入学校名称" clearable/>
+                    <el-form-item label="需求内容" prop="">
+                        <el-input v-model="queryParams.vcSchool" size="small" placeholder="请输入需求内容" clearable/>
                     </el-form-item>
                     <el-form-item label="渠道码" prop="">
                         <el-input v-model="queryParams.vcSince" size="small" placeholder="请输入渠道码" clearable/>
@@ -44,14 +44,14 @@
             :data="tableData"
             style="width: 100%">
                 <el-table-column type="index" width="55" label="序号" align="center"></el-table-column>
-                <el-table-column prop="nType" label="学生类型" align="center">
+                <el-table-column prop="nType" label="类型" align="center">
                     <template slot-scope="scope">
-                        {{ scope.row.nType==1?'初中生':'高中生' }}
+                        {{ scope.row.nType==1?'初中生':scope.row.nType==2?'高中生':'合作者' }}
                     </template>
                 </el-table-column>
-                <el-table-column prop="vcName" label="学生姓名" align="center"></el-table-column>
-                <el-table-column prop="vcSchool" label="目标学校名称" align="center"></el-table-column>
-                <el-table-column prop="vcPhone" label="家长手机号" align="center"></el-table-column>
+                <el-table-column prop="vcName" label="姓名" align="center"></el-table-column>
+                <el-table-column prop="vcSchool" label="需求内容" align="center"></el-table-column>
+                <el-table-column prop="vcPhone" label="手机号" align="center"></el-table-column>
                 <el-table-column prop="vcSince" label="渠道码" align="center"></el-table-column>
                 <el-table-column prop="dtCreateTime" label="创建时间" align="center"></el-table-column>
             </el-table>
@@ -91,6 +91,9 @@ export default {
             }, {
                 value: 2,
                 label: '高中生'
+            }, {
+                value: 3,
+                label: '合作者'
             }],
             loading: false,
         }
