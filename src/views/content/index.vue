@@ -5,16 +5,16 @@
             <el-tab-pane label="高考科目" name="20000"></el-tab-pane>
             <el-tab-pane label="兴趣爱好" name="30000"></el-tab-pane>
             <el-tab-pane label="性格特点" name="40000"></el-tab-pane>
-            <el-tab-pane label="家长可承受费用(初中)" name="51000"></el-tab-pane>
-            <el-tab-pane label="家长可承受费用(高中)" name="55000"></el-tab-pane>
-            <el-tab-pane label="家庭期望目标(初中)" name="52000"></el-tab-pane>
-            <el-tab-pane label="家庭期望目标(高中)" name="56000"></el-tab-pane>
+            <el-tab-pane label="可承受费用(初中)" name="51000"></el-tab-pane>
+            <el-tab-pane label="可承受费用(高中)" name="55000"></el-tab-pane>
+            <el-tab-pane label="期望目标(初中)" name="52000"></el-tab-pane>
+            <el-tab-pane label="期望目标(高中)" name="56000"></el-tab-pane>
             <el-tab-pane label="学业方向意愿" name="53000"></el-tab-pane>
             <el-tab-pane label="家庭年收入" name="54000"></el-tab-pane>
             <el-tab-pane label="技能培养目标" name="60000"></el-tab-pane>
-            <el-tab-pane label="意向专业" name="70000"></el-tab-pane>
+            <el-tab-pane label="意向专业(本科类)" name="70000"></el-tab-pane>
+            <el-tab-pane label="意向专业(专科类)" name="80000"></el-tab-pane>
             <el-tab-pane label="就读距离" name="57000"></el-tab-pane>
-            <el-tab-pane label="读研读博" name="58000"></el-tab-pane>
         </el-tabs>
         <el-card class="box-card">
             <el-button
