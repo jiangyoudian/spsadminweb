@@ -7,7 +7,17 @@
                     <el-input size="small" v-model="queryParams.vcName" placeholder="请输入学校名称" clearable/>
                 </el-form-item>
                 <el-form-item label="市县" prop="">
-                    <el-input size="small" v-model="queryParams.vcCity" placeholder="请输入市县名称" clearable/>
+                    <el-select v-model="queryParams.vcCity" size="small" placeholder="请选择">
+                            <el-option
+                            v-for="item in lgtCity"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                </el-form-item>
+                <el-form-item label="星级" prop="">
+                    <el-input-number size="small" v-model="queryParams.nStar" :min="0" :max="5" placeholder="请输入星级" clearable/>
                 </el-form-item>
                 <el-form-item label="是否推荐" prop="">
                         <el-select v-model="queryParams.nStatus" size="small" placeholder="请选择">
@@ -107,6 +117,50 @@ export default {
                 lgtSchoolId: [],
                 nStar: '',
             },
+            lgtCity:[{
+                value: '长沙市',
+                label: '长沙市'
+            },{
+                value: '株洲市',
+                label: '株洲市'
+            },{
+                value: '湘潭市',
+                label: '湘潭市'
+            },{
+                value: '衡阳市',
+                label: '衡阳市'
+            },{
+                value: '邵阳市',
+                label: '邵阳市'
+            },{
+                value: '岳阳市',
+                label: '岳阳市'
+            },{
+                value: '常德市',
+                label: '常德市'
+            },{
+                value: '张家界市',
+                label: '张家界市'
+            },{
+                value: '益阳市',
+                label: '益阳市'
+            },{
+                value: '郴州市',
+                label: '郴州市'
+            },{
+                value: '永州市',
+                label: '永州市'
+            },{
+                value: '娄底市',
+                label: '娄底市'
+            },{
+                value: '湘西土家族苗族自治州',
+                label: '湘西土家族苗族自治州'
+            },{
+                value: '怀化市',
+                label: '怀化市'
+            }
+            ],
             options: [{
                 value: 0,
                 label: '全部'
@@ -122,7 +176,8 @@ export default {
                 nPageSize: 10,
                 vcName: '',
                 vcCity:'',
-                nStatus:0
+                nStatus:0,
+                nStar:0
             },
             totalRowNum: 0,
             multipleSelection: [],
