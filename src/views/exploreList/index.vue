@@ -104,6 +104,7 @@ export default {
     },
     methods: {
         handleQuery(){
+            this.queryParams.nPageIndex =0;
             if(!this.queryParams.dtStartTime||!this.queryParams.dtEndTime){
                 this.$message({
                     message: '请选择创建时间',

@@ -118,6 +118,9 @@ export default {
                 nStar: '',
             },
             lgtCity:[{
+                value: '',
+                label: '全部'
+            },{
                 value: '长沙市',
                 label: '长沙市'
             },{
@@ -195,6 +198,7 @@ export default {
     },
     methods: {
         handleQuery(){
+            this.queryParams.nPageIndex =0;
             getSchoolList(this.queryParams).then(response =>{
                 let res = response.data
                 console.log(res)
