@@ -74,7 +74,7 @@ export default {
             queryParams: {
                 nPageIndex: 1,
                 nPageSize: 10,
-                nType: 1,
+                nType: 2,
                 vcSchool: '',
                 vcName: '',
                 dtStartTime: '',
@@ -153,11 +153,11 @@ export default {
         },
         handleSizeChange(val) {
             this.queryParams.nPageSize = val
-            this.queryParams.nPageIndex = 0;
             this.handleQuery()
         },
         handleCurrentChange(val) {
             this.queryParams.nPageIndex = val
+            this.queryParams.nPageIndex =0;
             this.handleQuery()
         },
         timeDate(){

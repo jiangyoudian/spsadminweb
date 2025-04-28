@@ -74,7 +74,7 @@ export default {
             queryParams: {
                 nPageIndex: 1,
                 nPageSize: 10,
-                nType: 1,
+                nType: 3,
                 vcSchool: '',
                 vcName: '',
                 dtStartTime: '',

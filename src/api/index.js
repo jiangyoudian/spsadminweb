@@ -92,6 +92,42 @@ export const UpdateSchoolStar = (data) => {
   })
 }
 
+
+//新增学校
+export const AddSchool = (data) => {
+  return request({
+    url: '/Report/AddSchool',
+    method:'POST',
+    data: data, // 使用 FormData 作为请求体
+    headers: {
+      'Content-Type': 'multipart/form-data' // 明确指定内容类型
+    }
+    
+  })
+}
+
+//修改学校
+export const UpdateSchool = (data) => {
+  return request({
+    url: '/Report/UpdateSchool',
+    method:'POST',
+    data: data, // 使用 FormData 作为请求体
+    headers: {
+      'Content-Type': 'multipart/form-data' // 明确指定内容类型
+    }
+  })
+}
+
+
+//删除学校
+export const DeleteSchool = (data) => {
+  return request({
+    url: '/Report/DeleteSchool',
+    method:'POST',
+    data: data
+  })
+}
+
 //获取探校记录
 export const QueryProbeSchool = (data) => {
   return request({
@@ -136,4 +172,73 @@ export const DeletQuestion = (data) => {
   })
 }
 
+//获取套餐列表
+export const GetThaliList = () => {
+  return request({
+    url: '/Report/GetThali',
+    method:'GET',
+  })
+}
 
+//修改套餐
+export const UpdateThali = (data) => {
+  return request({
+    url: '/Report/UpdateThali',
+    method:'POST',
+    data: data
+  })
+}
+
+//获取探校记录
+export const QueryQuestionnaire = (data) => {
+  return request({
+    url: '/Report/QueryQuestionnaire',
+    method:'POST',
+    data: data
+  })
+}
+
+
+//获取学校分数线列表
+export const QuerySchoolScore = (data) => {
+  return request({
+    url: '/Report/QuerySchoolScore',
+    method:'POST',
+    data: data
+  })
+}
+
+
+//获取市县
+export const GetCityCounty = () => {
+  return request({
+    url: '/Report/GetCityCounty',
+    method:'GET',
+  })
+}
+
+//新增分数线
+export const AddSchoolScore = (data) => {
+  return request({
+    url: '/Report/AddSchoolScore',
+    method:'POST',
+    data: data
+  })
+}
+
+//修改分数线
+export const UpdateSchoolScore = (data) => {
+  return request({
+    url: '/Report/UpdateSchoolScore',
+    method:'POST',
+    data: data
+  })
+}
+
+//删除分数线
+export const DeletSchoolScore = (nId) => {
+  return request({
+    url: '/Report/DeletSchoolScore?nId='+nId,
+    method:'GET',
+  })
+}

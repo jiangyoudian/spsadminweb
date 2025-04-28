@@ -30,6 +30,7 @@
                         </el-select>
                     </el-form-item>
                 <el-form-item>
+                    <el-button type="primary" size="small" icon="Search" @click="handleAdd">新增</el-button>
                     <el-button type="primary" size="small" icon="Search" @click="handleQuery">搜索</el-button>
                 </el-form-item>
                 </el-form>
@@ -47,13 +48,20 @@
                     @click="handleSelectionChangeStar()">
                     批量修改星级
                 </el-button>
+                <el-button
+                    size="small"
+                    type="primary"
+                    :disabled="lgtSchoolId.length==0?true:false"
+                    @click="handleSelectionDelete()">
+                    批量删除
+                </el-button>
             </div>
             <el-table
             :data="tableData"
             style="width: 100%"
             @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55"></el-table-column>
-                <el-table-column type="index" width="80" label="学校编号" align="center"></el-table-column>
+                <el-table-column prop="nId" width="80" label="学校编号" align="center"></el-table-column>
                 <el-table-column prop="vcName" label="学校名称" align="center" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="vcCity" label="市县" align="center"></el-table-column>
                 <el-table-column prop="vcNature" label="性质" align="center"></el-table-column>
@@ -72,7 +80,15 @@
                         <el-button
                         size="mini"
                         type="text"
+                        @click="handleUpdate(scope.$index, scope.row)">修改</el-button>
+                        <el-button
+                        size="mini"
+                        type="text"
                         @click="handleRecommend(scope.$index, scope.row)">{{scope.row.nStatus==1?'取消推荐':'推荐'}}</el-button>
+                        <el-button
+                        size="mini"
+                        type="text"
+                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                         <el-button
                         size="mini"
                         type="text"
@@ -103,11 +119,79 @@
                 </el-form-item>
             </el-form>
         </el-dialog>   
+        <el-dialog title="学校信息" :visible.sync="addForm.dialog" :close-on-click-modal="false" width="500px">
+            <el-form ref="ruleForm" :model="addForm.form" :rules="addRulesObj">
+                <el-form-item label="学校名称" prop="vcName">
+                    <el-input size="small" v-model="addForm.form.vcName" placeholder="请输入学校名称" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item label="所在城市" prop="vcCity">
+                    <el-select v-model="addForm.form.vcCity" size="small" placeholder="请选择">
+                            <el-option
+                            v-for="item in lgtCity"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                </el-form-item>
+                <el-form-item label="办学性质" prop="">
+                    <el-input size="small" v-model="addForm.form.vcNature" placeholder="请输入办学性质" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item label="招生代码" prop="">
+                    <el-input size="small" v-model="addForm.form.vcCode" placeholder="请输入招生代码" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item label="在校人数" prop="">
+                    <el-input size="small" v-model="addForm.form.vcPeople" placeholder="请输入在校人数" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item label="学校面积" prop="">
+                    <el-input size="small" v-model="addForm.form.vcArea" placeholder="请输入学校面积" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item label="学校地址" prop="">
+                    <el-input size="small" v-model="addForm.form.vcAddress" placeholder="请输入学校地址" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item label="学校网址" prop="">
+                    <el-input size="small" v-model="addForm.form.vcUrl" placeholder="请输入学校网址" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item label="主要荣誉" prop="">
+                    <el-input type="textarea" size="small" v-model="addForm.form.vcHonor" placeholder="请输入主要荣誉" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item label="办学特色" prop="">
+                    <el-input type="textarea" size="small" v-model="addForm.form.vcFeature" placeholder="请输入办学特色" style="width: 300px;" clearable/>
+                </el-form-item>
+                <el-form-item prop="nStar" label="星级">
+                    <el-input-number v-model="addForm.form.nStar" style="width:300px;" :min="0" :max="5" size="small" placeholder="请输入星级" />
+                </el-form-item>
+                <el-form-item label="图片" prop="formFiles">
+                    <el-upload
+                    action="#"            
+                    list-type="picture-card"
+                    :auto-upload="false"   
+                    :on-change="handleChange"
+                    :on-remove="handleRemove" 
+                    :file-list="addForm.form.images" 
+                    multiple             
+                    :limit="10" 
+                    >
+                    <i class="el-icon-plus"></i>
+                    </el-upload>
+                </el-form-item>
+                <el-form-item style="width:100%;">
+                    <div style="display:flex;justify-content: flex-end;margin-right: 10px;margin-bottom: -30px">
+                        <el-button size="medium" style="margin-top:10px;" @click="handleCancel()">
+                            取消
+                        </el-button>
+                        <el-button size="medium" style="margin-left:10px;margin-top:10px;" type="primary" @click="handleAddClick()">
+                            确定
+                        </el-button>
+                    </div>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
     </div>
 </template>
     
 <script>
-import { getSchoolList,RecommendedSchool,UpdateSchoolStar } from '@/api';
+import { DeleteSchool, getSchoolList,RecommendedSchool,UpdateSchoolStar,AddSchool,UpdateSchool } from '@/api';
 export default {
     name: 'schoolList',
     data() {
@@ -186,10 +270,26 @@ export default {
             multipleSelection: [],
             lgtSchoolId: [],
             dialog: false,
+            addForm:{
+                dialog:false,
+                images:[],
+                form:{}
+            },
             rulesObj: {
                 nStar: [
                     { required: true, message: '星级不能为空', trigger: 'blur' },
                 ],
+            },
+            addRulesObj: {
+                nStar: [
+                    { required: true, message: '星级不能为空', trigger: 'blur' },
+                ],
+                vcName: [
+                    { required: true, message: '学校名称不能为空', trigger: 'blur' },
+                ],
+                vcCity: [
+                    { required: true, message: '所在城市不能为空', trigger: 'blur' },
+                ]
             }
         }
     },
@@ -198,7 +298,6 @@ export default {
     },
     methods: {
         handleQuery(){
-            this.queryParams.nPageIndex =0;
             getSchoolList(this.queryParams).then(response =>{
                 let res = response.data
                 console.log(res)
@@ -283,6 +382,58 @@ export default {
             this.form.lgtSchoolId = this.lgtSchoolId
             this.dialog = true
         },
+        handleDelete(index,row){
+            this.$confirm('确定删除此数据?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                DeleteSchool([row.nId]).then(response =>{
+                    let res = response.data
+                    console.log(res)
+                    if(res.code==0){
+                        this.dialog = false
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        });
+                        this.handleQuery()
+                    }else{
+                        this.$message({
+                            message: res.message,
+                            type: 'error'
+                        });
+                    }   
+                })
+
+            });
+        },
+        handleSelectionDelete() {
+            this.$confirm('确定删除此数据?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                DeleteSchool(this.lgtSchoolId).then(response =>{
+                    let res = response.data
+                    console.log(res)
+                    if(res.code==0){
+                        this.dialog = false
+                        this.$message({
+                            message: '删除成功',
+                            type: 'success'
+                        });
+                        this.handleQuery()
+                    }else{
+                        this.$message({
+                            message: res.message,
+                            type: 'error'
+                        });
+                    }   
+                })
+
+            });
+        },
         handleEnsureClick(){
             this.$refs['ruleForm'].validate((valid) => {
                 if(!valid){ 
@@ -309,12 +460,96 @@ export default {
         },
         handleSizeChange(val) {
             this.queryParams.nPageSize = val
+            this.queryParams.nPageIndex =0;
             this.handleQuery()
         },
         handleCurrentChange(val) {
             this.queryParams.nPageIndex = val
             this.handleQuery()
         },
+         // 文件选择变化时的处理
+        handleChange(file, fileList) {
+            this.addForm.form.images = fileList;
+        },
+        // 移除文件时的处理
+        handleRemove(file, fileList) {
+            this.addForm.form.images = fileList;
+        },
+        handleAdd(){
+            this.addForm.form={};
+            this.addForm.form.nId = 0;
+            this.addForm.dialog = true;
+        },
+        handleUpdate(index,row){
+            this.addForm.form={};
+            this.addForm.form = row;
+            this.addForm.form.images = row.lgtImage.map(img => ({
+                name: img.vcTitle+".png", 
+                url: img.vcUrl,            
+                status: "success"  
+                }));
+            this.addForm.dialog = true;
+        },
+        handleAddClick() 
+        {
+            const formData = new FormData();
+            formData.append("nId", this.addForm.form.nId);
+            formData.append("vcName", this.addForm.form.vcName);
+            formData.append("vcCity", this.addForm.form.vcCity);
+            formData.append("nStar", this.addForm.form.nStar);
+            formData.append("vcAddress", this.addForm.form.vcAddress);
+            formData.append("vcArea", this.addForm.form.vcArea);
+            formData.append("vcCode", this.addForm.form.vcCode);
+            formData.append("vcFeature", this.addForm.form.vcFeature);
+            formData.append("vcHonor", this.addForm.form.vcHonor);
+            formData.append("vcUrl", this.addForm.form.vcUrl);
+            formData.append("vcPeople", this.addForm.form.vcPeople);
+            this.addForm.form.images.forEach((file) => {
+                formData.append('formFiles', file.raw);
+            });
+            if(this.addForm.form.nId==0){
+                AddSchool(formData).then(response => {
+                let res = response.data
+                console.log(res)
+                if (res.code == 0) {
+                    this.addForm.dialog = false
+                    this.$message({
+                        message: '新增成功',
+                        type: 'success'
+                    });
+                    this.handleQuery()
+                } else {
+                    this.$message({
+                        message: res.message,
+                        type: 'error'
+                    });
+                }
+            })
+            }else{
+                UpdateSchool(formData).then(response => {
+                let res = response.data
+                console.log(res)
+                if (res.code == 0) {
+                    this.addForm.dialog = false
+                    this.$message({
+                        message: '修改成功',
+                        type: 'success'
+                    });
+                    this.handleQuery()
+                } else {
+                    this.$message({
+                        message: res.message,
+                        type: 'error'
+                    });
+                }
+            })
+            }
+            
+        },
+        handleCancel(){
+            this.addForm.dialog = false;
+            this.addForm.form={};
+        }
     }
 
 }

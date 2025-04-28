@@ -29,6 +29,10 @@ const routes = [
       name: 'content',
       component: () => import('@/views/content')
     },{
+      path: '/reportList',
+      name: 'reportList',
+      component: () => import('@/views/reportList')
+    },{
       path: '/schoolList',
       name: 'schoolList',
       component: () => import('@/views/schoolList')
@@ -36,6 +40,22 @@ const routes = [
       path: '/exploreList',
       name: 'exploreList',
       component: () => import('@/views/exploreList')
+    },{
+      path: '/volunteerList',
+      name: 'volunteerList',
+      component: () => import('@/views/volunteerList')
+    },{
+      path: '/contactList',
+      name: 'contactList',
+      component: () => import('@/views/contactList')
+    },{
+      path: '/thaliList',
+      name: 'thaliList',
+      component: () => import('@/views/thaliList')
+    },{
+      path: '/scoreList',
+      name: 'scoreList',
+      component: () => import('@/views/scoreList')
     }]
   }
 ]

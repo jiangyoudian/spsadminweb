@@ -58,12 +58,32 @@ export default {
                     title: '问卷内容'
                 },
                 {
+                    indexPath: '/reportList',
+                    title: '报告列表'
+                },
+                {
                     indexPath: '/schoolList',
                     title: '学校列表'
                 },
                 {
                     indexPath: '/exploreList',
-                    title: '探校列表'
+                    title: '探校数据'
+                },
+                {
+                    indexPath: '/volunteerList',
+                    title: '志愿填报数据'
+                },
+                {
+                    indexPath: '/contactList',
+                    title: '联系我们数据'
+                },
+                {
+                    indexPath: '/thaliList',
+                    title: '套餐列表'
+                },
+                {
+                    indexPath: '/scoreList',
+                    title: '学校分数线列表'
                 },
             ] //res.data
         }
