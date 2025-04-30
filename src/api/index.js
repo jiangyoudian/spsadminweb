@@ -198,6 +198,14 @@ export const QueryQuestionnaire = (data) => {
   })
 }
 
+//统计
+export const QueryTotal = (data) => {
+  return request({
+    url: '/Report/QueryTotal',
+    method:'POST',
+    data: data
+  })
+}
 
 //获取学校分数线列表
 export const QuerySchoolScore = (data) => {

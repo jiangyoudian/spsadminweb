@@ -3,25 +3,6 @@
         <el-card class="box-card">
             <div class="top-box">
                 <el-form ref="queryFormRef" :model="queryParams" :inline="true">
-                    <!-- <el-form-item label="类型" prop="">
-                        <el-select v-model="queryParams.nType" size="small" placeholder="请选择类型">
-                            <el-option
-                            v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="姓名" prop="">
-                        <el-input v-model="queryParams.vcName" size="small" placeholder="请输入姓名" clearable/>
-                    </el-form-item>
-                    <el-form-item label="需求内容" prop="">
-                        <el-input v-model="queryParams.vcSchool" size="small" placeholder="请输入需求内容" clearable/>
-                    </el-form-item>
-                    <el-form-item label="渠道码" prop="">
-                        <el-input v-model="queryParams.vcSince" size="small" placeholder="请输入渠道码" clearable/>
-                    </el-form-item> -->
                     <el-form-item label="创建时间" prop="">
                         <el-date-picker
                             v-model="queryParams.date"
@@ -50,8 +31,10 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="vcName" label="姓名" align="center"></el-table-column>
-                <el-table-column prop="vcSchool" label="需求内容" align="center"></el-table-column>
+                <el-table-column prop="vcSchool" label="学校名称" align="center"></el-table-column>
                 <el-table-column prop="vcPhone" label="手机号" align="center"></el-table-column>
+                <el-table-column prop="vcCity" label="城市" align="center"></el-table-column>
+                <el-table-column prop="vcCounty" label="区县" align="center"></el-table-column>
                 <el-table-column prop="vcSince" label="渠道码" align="center"></el-table-column>
                 <el-table-column prop="dtCreateTime" label="创建时间" align="center"></el-table-column>
             </el-table>
