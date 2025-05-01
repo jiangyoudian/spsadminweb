@@ -15,11 +15,31 @@
                             @change="dateChange">
                         </el-date-picker>
                     </el-form-item>
+                    <el-form-item label="市县" prop="">
+                    <el-select v-model="queryParams.vcCity" size="small" placeholder="请选择">
+                            <el-option
+                            v-for="item in lgtCity"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                            </el-option>
+                        </el-select>
+                </el-form-item>
                     <el-form-item>
                         <el-button type="primary" size="small" icon="Search" @click="handleQuery">搜索</el-button>
                         <el-button type="primary" size="small" :loading="loading" icon="Search" @click="handleExport">导出</el-button>
                     </el-form-item>
                 </el-form>
+            </div>
+            <div style="border-radius: 0px">
+                <el-row :gutter="20">
+                    <el-col :span="6">
+                        <div>
+                            <el-statistic title="志愿套餐咨询数" :value="totalData.nVolunteer">
+                            </el-statistic>
+                        </div>
+                    </el-col>
+                </el-row>
             </div>
             <el-table
             :data="tableData"
@@ -48,11 +68,12 @@
 </template>
     
 <script>
-import { QueryProbeSchool,ExportProbeSchool } from '@/api';
+import { QueryProbeSchool,ExportProbeSchool,QueryTotal} from '@/api';
 export default {
     name: 'exploreList',
     data() {
         return {
+            totalData:{},
             tableData: [],
             queryParams: {
                 nPageIndex: 1,
@@ -60,6 +81,9 @@ export default {
                 nType: 2,
                 vcSchool: '',
                 vcName: '',
+                vcProvince:'',
+                vcCity:'',
+                vcCounty:'',
                 dtStartTime: '',
                 dtEndTime: '',
                 date: [],
@@ -79,6 +103,53 @@ export default {
                 label: '合作者'
             }],
             loading: false,
+            lgtCity:[{
+                value: '',
+                label: '全部'
+            },{
+                value: '长沙市',
+                label: '长沙市'
+            },{
+                value: '株洲市',
+                label: '株洲市'
+            },{
+                value: '湘潭市',
+                label: '湘潭市'
+            },{
+                value: '衡阳市',
+                label: '衡阳市'
+            },{
+                value: '邵阳市',
+                label: '邵阳市'
+            },{
+                value: '岳阳市',
+                label: '岳阳市'
+            },{
+                value: '常德市',
+                label: '常德市'
+            },{
+                value: '张家界市',
+                label: '张家界市'
+            },{
+                value: '益阳市',
+                label: '益阳市'
+            },{
+                value: '郴州市',
+                label: '郴州市'
+            },{
+                value: '永州市',
+                label: '永州市'
+            },{
+                value: '娄底市',
+                label: '娄底市'
+            },{
+                value: '湘西土家族苗族自治州',
+                label: '湘西土家族苗族自治州'
+            },{
+                value: '怀化市',
+                label: '怀化市'
+            }
+            ],
         }
     },
     mounted(){
@@ -94,12 +165,23 @@ export default {
                 });
                 return
             }
+            this.handleQueryTotal();
+
             QueryProbeSchool(this.queryParams).then(response =>{
                 let res = response.data
                 console.log(res)
                 if(res.code==0){
                     this.tableData = res.data.data
                     this.totalRowNum = res.data.dataCount
+                }
+            })
+        },
+        handleQueryTotal(){
+            QueryTotal(this.queryParams).then(response =>{
+                let res = response.data
+                console.log(res)
+                if(res.code==0){
+                    this.totalData = res.data;
                 }
             })
         },

@@ -58,12 +58,20 @@ export default {
                     title: '问卷内容'
                 },
                 {
-                    indexPath: '/reportList',
-                    title: '报告列表'
+                    indexPath: '/schoolList',
+                    title: '中职(技工)学校列表'
                 },
                 {
-                    indexPath: '/schoolList',
-                    title: '学校列表'
+                    indexPath: '/scoreList',
+                    title: '学校分数线列表'
+                },
+                {
+                    indexPath: '/thaliList',
+                    title: '高中志愿填报套餐'
+                },
+                {
+                    indexPath: '/reportList',
+                    title: '学业规划报告数据'
                 },
                 {
                     indexPath: '/exploreList',
@@ -76,14 +84,6 @@ export default {
                 {
                     indexPath: '/contactList',
                     title: '联系我们数据'
-                },
-                {
-                    indexPath: '/thaliList',
-                    title: '套餐列表'
-                },
-                {
-                    indexPath: '/scoreList',
-                    title: '学校分数线列表'
                 },
             ] //res.data
         }

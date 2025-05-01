@@ -32,18 +32,6 @@
                             </el-statistic>
                         </div>
                     </el-col>
-                    <el-col :span="6">
-                        <div>
-                            <el-statistic title="探校意愿数" :value="totalData.nProbe">
-                            </el-statistic>
-                        </div>
-                    </el-col>
-                    <el-col :span="6">
-                        <div>
-                            <el-statistic title="咨询数" :value="totalData.nVolunteer">
-                            </el-statistic>
-                        </div>
-                    </el-col>
                 </el-row>
             </div>
             <el-table :data="tableData" style="width: 100%">
