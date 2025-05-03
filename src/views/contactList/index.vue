@@ -44,11 +44,6 @@
             :data="tableData"
             style="width: 100%">
                 <el-table-column type="index" width="55" label="序号" align="center"></el-table-column>
-                <el-table-column prop="nType" label="类型" align="center">
-                    <template slot-scope="scope">
-                        {{ scope.row.nType==1?'初中生':scope.row.nType==2?'高中生':'合作者' }}
-                    </template>
-                </el-table-column>
                 <el-table-column prop="vcName" label="姓名" align="center"></el-table-column>
                 <el-table-column prop="vcSchool" label="需求内容" align="center"></el-table-column>
                 <el-table-column prop="vcPhone" label="手机号" align="center"></el-table-column>

@@ -39,7 +39,7 @@
                 <el-table-column prop="vcName" label="姓名" align="center"></el-table-column>
                 <el-table-column prop="nSex" label="性别" align="center" width="50">
                     <template slot-scope="scope">
-                        {{ scope.row.nSex==1?'男':scope.row.nType==2?'女':'未知' }}
+                        {{ scope.row.nSex==1?'男':scope.row.nSex==2?'女':'未知' }}
                     </template>
                 </el-table-column>
                 <el-table-column prop="nAge" label="年龄" align="center" width="50"></el-table-column>
@@ -49,6 +49,11 @@
                 <el-table-column prop="vcSchool" label="学校名称" align="center"></el-table-column>
                 <el-table-column prop="vcClass" label="所在班级" align="center"></el-table-column>
                 <el-table-column prop="vcSince" label="渠道码" align="center"></el-table-column>
+                <el-table-column label="报告文件" align="center">
+                    <template slot-scope="scope">
+                        <a :href="scope.row.vcPdfUrl" target="_blank" class="buttonText">查看</a>
+                </template>
+                </el-table-column>
                 <el-table-column prop="dtCreateTime" label="创建时间" align="center" width="100"></el-table-column>
             </el-table>
             <div style="display: flex;justify-content: flex-end;margin-top: 10px;">
